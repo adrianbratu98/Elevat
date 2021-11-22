@@ -1,0 +1,16 @@
+.hero-page {
+    background-image: url("/assets/img/hero.jpg");
+    height: 900px;
+}
+
+.sidebar {
+    background: rgba(255, 255, 255, 0.685);
+    height: 900px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.sidebar app-sidebar{
+    padding: 20px;
+}

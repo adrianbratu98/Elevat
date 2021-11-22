@@ -1,0 +1,49 @@
+h3, h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+
+h3 {
+    color: #d19f68;
+}
+
+p {
+    font-style: italic;
+}
+
+h3, h1, p {
+    text-shadow: 2px 1px 3px black;
+}
+
+.hero-page {
+    background:url("/assets/img/hero.jpg");
+    background-size: cover;
+    height: 900px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: right;
+}
+
+.text-area {
+    width: 600px;
+    color: white;
+    text-align: right;
+}
+
+/* Responsive */
+
+@media (max-width: 991px){
+    .text-area {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+    }
+}

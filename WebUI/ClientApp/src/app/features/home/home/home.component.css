@@ -1,0 +1,161 @@
+/* Hero Section */
+
+.container-hero {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: right;
+}
+
+h3, h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+
+h3, h2 {
+    letter-spacing: 3px;
+    margin-bottom: -3px;
+    color: #d19f68;
+}
+
+
+.text-area p {
+    font-style: italic;
+}
+
+.hero-page {
+    background:url("/assets/img/hero.jpg");
+    background-size: cover;
+    height: 900px;
+}
+
+.text-area {
+    width: 600px;
+    color: white;
+    text-align: right;
+    text-shadow: 2px 1px 3px black;
+}
+
+/* Responsive - Hero Section*/
+
+@media (max-width: 991px){
+    .text-area {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+    }
+}
+
+
+
+
+/* About Section */
+
+.section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: #f4f4f4;
+}
+
+.about-photos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.about-photos img {
+    width: 260px;
+    height: 270px;
+}
+
+.firstPhoto,
+.secondPhoto,
+.thirdPhoto {
+    position: absolute;
+    box-shadow: -1px 2px 3px 0px;
+}
+
+ 
+.thirdPhoto {
+    top: 20px;
+    right: 200px;
+    z-index: 1;
+}
+
+.secondPhoto {
+    top: 70px;
+    right: 5px;
+    z-index: 2;
+}
+
+
+.firstPhoto {
+    top: 170px;
+    right: 110px;
+    z-index: 3;
+}
+
+/* Responsive - About Section*/
+
+@media (max-width: 991px){
+    .firstPhoto,
+    .secondPhoto,
+    .thirdPhoto {
+        position:  static;
+        box-shadow: none;
+        padding: 20px;
+    }
+    
+}
+
+
+
+
+/* Service Section */
+
+.logo-header-service img {
+    width: 80px;
+}
+
+.service-wrapper{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #f4f4f4;
+    align-items: center;
+    text-align: center;
+    height: 345px;
+    margin: 40px;
+}
+
+.service-wrapper img {
+    width: 130px;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+
+/* Responsive - Service Section*/
+
+
+
+.book-section {
+    background-image: linear-gradient(#161212b5, #161212b5), url(/assets/img/book-wallpaper.jpg);
+    width: 100%;
+    height: 600px;
+    background-position: center;
+    
+}
+
+.book-container {
+    background: rgba(255, 255, 255, 0.507);
+    border-radius: 10px;
+    width: 700px;
+    height: 350px;
+}
+
+

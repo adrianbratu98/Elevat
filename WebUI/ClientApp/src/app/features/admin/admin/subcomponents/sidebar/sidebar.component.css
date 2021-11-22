@@ -1,0 +1,10 @@
+.selected {
+    color: white;
+}
+
+.button-sidebar {
+    background-color: rgba(0, 0, 0, 0.438);
+    margin-bottom: 20px;
+    width: 200px;
+    cursor: pointer;
+}

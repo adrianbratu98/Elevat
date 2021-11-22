@@ -1,0 +1,14 @@
+.about-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: #f4f4f4;
+}
+
+.header-area {
+    text-align: center;
+}
+
+.logo-header-service img {
+    width: 80px;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,31 @@
+.container {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.header-area {
+    text-align: center;
+}
+
+.logo-header-service img {
+    width: 80px;
+}
+
+
+
+.service-wrapper{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #f4f4f4;
+    align-items: center;
+    text-align: center;
+    height: 345px;
+    margin: 40px;
+}
+
+.service-wrapper img {
+    width: 130px;
+    padding: 20px;
+    border-radius: 50%;
+}

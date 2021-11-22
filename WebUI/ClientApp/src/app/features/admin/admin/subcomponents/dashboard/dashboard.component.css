@@ -1,0 +1,12 @@
+.wrapper-dash {
+    background: rgba(255, 255, 255, 0.685);
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+p {
+    color: red;
+}
