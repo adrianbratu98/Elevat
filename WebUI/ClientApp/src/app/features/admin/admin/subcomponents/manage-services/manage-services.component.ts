@@ -14,12 +14,13 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
 
   services: ServiceModel[] = [];
 
-  workServiceModel: ServiceModel | undefined; 
   private serviceFilterModel: ServiceFilterModel  = new ServiceFilterModel(); 
   private getAllServicesSubs: Subscription | undefined;  
   private sortColumn: string = "Name";
   private sortAscending: boolean = true;
-  filterName: string | undefined;
+  nameFilter: string = "";
+  workServiceModel:ServiceModel | undefined;
+
 
 
   constructor(private serviceSaloon: ServiceSaloonService) { }
@@ -39,7 +40,7 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
     this.serviceFilterModel = {
       sortColumn: this.sortColumn,
       sortAscending: this.sortAscending,
-      nameFilter: this.filterName
+      nameFilter: this.nameFilter
     }
     this.getAllServicesSubs = this.serviceSaloon.getAllServices(this.serviceFilterModel).subscribe(
       res => {
@@ -52,20 +53,18 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
   }
 
   sortService(sortColumn: string) {
-    if(!this.workServiceModel){
       this.sortAscending = !this.sortAscending;
       this.sortColumn = sortColumn;
       this.getAllServices();
-    }
   }
 
   addServiceRow() {
-    if(!this.workServiceModel) {
-      this.services.push(<ServiceModel> { id: 0, name: '', minutes: 0, price: 0 });
+    if(!this.workServiceModel){
+      this.services.push(this.workServiceModel = { id: 0, name: '', minutes: 0, price: 0 });
       setTimeout(()=>{ 
         document.getElementById('focusInput')?.focus();
       }, 0);
-    }
+    }      
   }
 
   editServiceRow(service: ServiceModel) {
@@ -79,7 +78,7 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
       setTimeout(()=>{ 
         document.getElementById('focusInput')?.focus();
       },0); 
-    }
+    }      
   }
 
   cancel(service:ServiceModel) {
@@ -103,10 +102,10 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
     else {
       this.serviceSaloon.updateService(service).subscribe(
         () => {
-          this.workServiceModel = undefined;
         }
       );
     }
+    this.workServiceModel = undefined;
   }
 
   deleteService(serviceId: number) {

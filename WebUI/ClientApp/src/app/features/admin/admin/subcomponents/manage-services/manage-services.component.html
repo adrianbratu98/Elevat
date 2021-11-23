@@ -1,7 +1,7 @@
 <div class="wrapper-dash">
     <div class="container d-flex justify-content-center">
       <table  class="table">   
-        <div class="search-input"><input type="text" placeholder="Search By Name" (change)="getAllServices()" [(ngModel)]="filterName"></div>     
+        <div class="search-input"><input type="text" placeholder="Search By Name" (keyup)="getAllServices()" [(ngModel)]="nameFilter"></div>     
         <thead>
           <tr>
             <th scope="col"><p>#</p></th>
@@ -18,15 +18,15 @@
                 <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.name }}</td>            
                 <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.minutes }}</td>
                 <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.price | currency }}</td>
-                <td *ngIf="(workServiceModel && (workServiceModel.id == service.id)) || service.id == 0"><input id="focusInput" [(ngModel)]="service.name"></td>
-                <td *ngIf="(workServiceModel && (workServiceModel.id == service.id)) || service.id == 0"><input [(ngModel)]="service.minutes"></td>
-                <td *ngIf="(workServiceModel && (workServiceModel.id == service.id)) || service.id == 0"><input [(ngModel)]="service.price"></td>
+                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.name" id="focusInput"></td>
+                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.minutes"></td>
+                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.price"></td>
 
                 <td class="service-buttons">
                     <div *ngIf="!workServiceModel || workServiceModel.id != service.id" class="update-service" (click)="editServiceRow(service)">E</div>
-                    <div *ngIf="!(workServiceModel && service.id != 0) || workServiceModel.id != service.id" class="delete-service" (click)="deleteService(service.id)">X</div>
-                    <div *ngIf="workServiceModel && (workServiceModel.id == service.id)" (click)="saveService(service)" class="save-service">S</div>
-                    <div *ngIf="workServiceModel && (workServiceModel.id == service.id)" (click)="cancel(service)" class="delete-service">C</div>
+                    <div *ngIf="!workServiceModel || workServiceModel.id != service.id" class="delete-service" (click)="deleteService(service.id)">X</div>
+                    <div *ngIf="workServiceModel && workServiceModel.id == service.id" (click)="saveService(service)" class="save-service">S</div>
+                    <div *ngIf="workServiceModel && workServiceModel.id == service.id" (click)="cancel(service)" class="delete-service">C</div>
                 </td>
                 
             </tr>
