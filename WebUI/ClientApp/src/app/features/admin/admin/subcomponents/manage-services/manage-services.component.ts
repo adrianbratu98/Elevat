@@ -48,23 +48,27 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
   }
 
   addRow() {
-    this.workService = { id: 0, name: '', minutes: 0, price: 0 };
-    this.services.push({ id: 0, name: '', minutes: 0, price: 0 });
-    setTimeout(()=>{ 
-      document.getElementById('focusInput')?.focus();
-    }, 0);
+    if(!this.workService){
+      this.workService = { id: 0, name: '', minutes: 0, price: 0 };
+      this.services.push({ id: 0, name: '', minutes: 0, price: 0 });
+      setTimeout(()=>{ 
+        document.getElementById('focusInput')?.focus();
+      }, 0);
+    }    
   }
 
   editRow(service: ServiceDTO) {
-    this.workService = {
-      id: service.id,
-      name: service.name,
-      minutes: service.minutes,
-      price: service.price
+    if(!this.workService) {
+      this.workService = {
+        id: service.id,
+        name: service.name,
+        minutes: service.minutes,
+        price: service.price
+      }
+      setTimeout(()=>{ 
+        document.getElementById('focusInput')?.focus();
+      },0); 
     }
-    setTimeout(()=>{ 
-      document.getElementById('focusInput')?.focus();
-    },0); 
   }
 
   cancel() {

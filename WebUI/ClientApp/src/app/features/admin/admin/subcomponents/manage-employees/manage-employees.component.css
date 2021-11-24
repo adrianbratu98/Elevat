@@ -5,16 +5,98 @@
     justify-content: center;
     align-items: center;
     margin: 20px;
+    
 }
 
 p {
     color: white;
 }
 
-.service-box-manage {
-    background-color:rgba(0, 0, 0, 0.438);
-    width: 600px;
-    height: 600px;
-    margin: 20px;
-    padding: 20px;
+table {
+    background: white;
+    border-radius: 5px;
+    position: relative;
+}
+
+
+.add-service {
+    width: 77px;
+}
+
+.add-service-wrapper {
+    background: green;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.service-buttons {
+    display: flex;
+}
+
+.update-service {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    background: blue;
+    color: white;
+}
+
+.delete-service {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    background: red;
+    color: white;
+}
+
+.save-service {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    background: green;
+    color: white;
+}
+
+.form-table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: #212529;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #212529;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+th p {
+    color: black;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.search-input {
+    position: absolute;
+    top: -35px;
+    width: 100%;
+}
+
+.search-input input {
+    width: 100%;
 }

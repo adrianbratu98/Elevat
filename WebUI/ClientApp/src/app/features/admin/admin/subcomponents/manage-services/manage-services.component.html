@@ -13,7 +13,7 @@
         </thead>
         <tbody>          
             <tr *ngFor="let service of services; let i = index ">
-                <th scope="row">{{i + 1}}</th>
+                <th style="width: 100px;" scope="row">{{i + 1}}</th>
                 <td *ngIf="!workService || workService.id != service.id">{{ service.name }}</td>            
                 <td *ngIf="!workService || workService.id != service.id">{{ service.minutes }}</td>
                 <td *ngIf="!workService || workService.id != service.id">{{ service.price | currency }}</td>
@@ -22,7 +22,7 @@
                 <td *ngIf="workService && workService.id == service.id"><input [(ngModel)]="workService.price"></td>
                 <td class="service-buttons">
                     <div *ngIf="!workService || workService.id != service.id" class="update-service" (click)="editRow(service)">E</div>
-                    <div  *ngIf="!workService" class="delete-service" (click)="delete(service.id)">X</div>
+                    <div *ngIf="!workService || workService.id != service.id" class="delete-service" (click)="delete(service.id)">X</div>
                     <div *ngIf="workService && workService.id == service.id" (click)="save()" class="save-service">S</div>
                     <div *ngIf="workService && workService.id == service.id" (click)="cancel()" class="delete-service">C</div>
                 </td>

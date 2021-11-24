@@ -3,4 +3,5 @@ export enum HttpEndpoints {
     CreateNewService = "service/create",
     UpdateService = "service/update",
     DeleteService = "service/delete",
+    GetAllEmployees = "employee/getList",
 }

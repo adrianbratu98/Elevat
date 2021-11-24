@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  selectedParent:string = "manage-services"
+  selectedParent:string = "manage-employees"
 
   constructor() { }
 

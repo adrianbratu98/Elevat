@@ -1,6 +1,6 @@
-﻿using Application.Employees.Queries;
+﻿using Application.Employees.Commands.CreateEmployee;
+using Application.Employees.Queries;
 using Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,17 +14,17 @@ namespace WebUI.Controllers
 
 
         //GET ALL
-        [HttpGet("all")]
-        public async Task<List<Employee>> GetServiceList()
+        [HttpGet("getList")]
+        public async Task<List<Employee>> GetList()
         {
             return await Mediator.Send(new GetEmployeesListQuery());
         }
 
-        //GET SERVICE EMPLOYEES
-        [HttpGet("employee-services/{id}")]
-        public async Task<List<Service>> GetEmployeeServices(int id)
+        //POST NEW EMPLOYEE
+        [HttpPost("create")]
+        public async Task<int> Create(CreateEmployeeCommand command)
         {
-            return await Mediator.Send(new GetEmployeeServicesQuery { Id = id });
+            return await Mediator.Send(command);
         }
     }
 }
