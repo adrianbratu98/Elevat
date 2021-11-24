@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpEndpoints } from '../models/http-endpoints';
-import { HttpMethod } from '../models/http-methods';
+import { HttpEndpoints } from '../models/App/http-endpoints';
+import { HttpMethod } from '../models/App/http-methods';
 
 @Injectable({
   providedIn: 'root'

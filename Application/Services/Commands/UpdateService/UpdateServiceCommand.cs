@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Commands.CreateService
 {
-    public class UpdateServiceCommand : IRequest
+    public class UpdateServiceCommand : IRequest<int>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,7 +13,7 @@ namespace Application.Services.Commands.CreateService
         public double Price { get; set; }
     }
 
-    public class UpdateServiceCommandHandler : IRequestHandler<UpdateServiceCommand>
+    public class UpdateServiceCommandHandler : IRequestHandler<UpdateServiceCommand, int>
     {
         private readonly IElevatDbContext _context;
         public UpdateServiceCommandHandler(IElevatDbContext context)
@@ -21,7 +21,7 @@ namespace Application.Services.Commands.CreateService
             _context = context;
         }
 
-        public async Task<Unit> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
         {
             var service = await _context.Services.FindAsync(request.Id);
 
@@ -31,7 +31,7 @@ namespace Application.Services.Commands.CreateService
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return service.Id;
         }
     }
 }

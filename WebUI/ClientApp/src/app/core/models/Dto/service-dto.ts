@@ -1,4 +1,4 @@
-export class ServiceModel {
+export class ServiceDTO {
     public id: number = 0;
     public name: string = "";
     public minutes: number = 0;

@@ -46,7 +46,7 @@ namespace WebUI.Controllers
 
         //UPDATE SERVICE
         [HttpPut("update")]
-        public async Task<ActionResult<Unit>> UpdateService(UpdateServiceCommand command)
+        public async Task<int> UpdateService(UpdateServiceCommand command)
         {
             return await Mediator.Send(command);
         }

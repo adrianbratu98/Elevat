@@ -1,34 +1,31 @@
 <div class="wrapper-dash">
     <div class="container d-flex justify-content-center">
       <table  class="table">   
-        <div class="search-input"><input type="text" placeholder="Search By Name" (keyup)="getAllServices()" [(ngModel)]="nameFilter"></div>     
+        <div class="search-input"><input type="text" placeholder="Search By Name" (keyup)="getList()" [(ngModel)]="nameFilter"></div>     
         <thead>
           <tr>
             <th scope="col"><p>#</p></th>
-            <th scope="col"><p (click)="sortService('Name')">Name</p></th>
-            <th scope="col"><p (click)="sortService('Minutes')">Minutes</p></th>
-            <th scope="col"><p (click)="sortService('Price')">Price</p></th>
-            <th class="add-service" scope="col"><div class="add-service-wrapper" (click)="addServiceRow()"><p>Add</p></div></th>
+            <th scope="col"><p (click)="sort('Name')">Name</p></th>
+            <th scope="col"><p (click)="sort('Minutes')">Minutes</p></th>
+            <th scope="col"><p (click)="sort('Price')">Price</p></th>
+            <th class="add-service" scope="col"><div class="add-service-wrapper" (click)="addRow()"><p>Add</p></div></th>
           </tr>
         </thead>
         <tbody>          
             <tr *ngFor="let service of services; let i = index ">
-
                 <th scope="row">{{i + 1}}</th>
-                <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.name }}</td>            
-                <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.minutes }}</td>
-                <td *ngIf="!workServiceModel || workServiceModel.id != service.id">{{ service.price | currency }}</td>
-                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.name" id="focusInput"></td>
-                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.minutes"></td>
-                <td *ngIf="workServiceModel && workServiceModel.id == service.id"><input [(ngModel)]="service.price"></td>
-
+                <td *ngIf="!workService || workService.id != service.id">{{ service.name }}</td>            
+                <td *ngIf="!workService || workService.id != service.id">{{ service.minutes }}</td>
+                <td *ngIf="!workService || workService.id != service.id">{{ service.price | currency }}</td>
+                <td *ngIf="workService && workService.id == service.id"><input [(ngModel)]="workService.name" id="focusInput"></td>
+                <td *ngIf="workService && workService.id == service.id"><input [(ngModel)]="workService.minutes"></td>
+                <td *ngIf="workService && workService.id == service.id"><input [(ngModel)]="workService.price"></td>
                 <td class="service-buttons">
-                    <div *ngIf="!workServiceModel || workServiceModel.id != service.id" class="update-service" (click)="editServiceRow(service)">E</div>
-                    <div *ngIf="!workServiceModel || workServiceModel.id != service.id" class="delete-service" (click)="deleteService(service.id)">X</div>
-                    <div *ngIf="workServiceModel && workServiceModel.id == service.id" (click)="saveService(service)" class="save-service">S</div>
-                    <div *ngIf="workServiceModel && workServiceModel.id == service.id" (click)="cancel(service)" class="delete-service">C</div>
+                    <div *ngIf="!workService || workService.id != service.id" class="update-service" (click)="editRow(service)">E</div>
+                    <div  *ngIf="!workService" class="delete-service" (click)="delete(service.id)">X</div>
+                    <div *ngIf="workService && workService.id == service.id" (click)="save()" class="save-service">S</div>
+                    <div *ngIf="workService && workService.id == service.id" (click)="cancel()" class="delete-service">C</div>
                 </td>
-                
             </tr>
         </tbody>
       </table>
