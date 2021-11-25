@@ -9,10 +9,5 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Indentity
 {
-    public class ApplicationUser : IdentityUser
-    {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-    }
+    public class Role : IdentityRole<int> { }
 }

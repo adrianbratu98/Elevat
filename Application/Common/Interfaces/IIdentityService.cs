@@ -8,6 +8,7 @@ namespace Application.Common.Interfaces
 {
     public interface IIdentityService
     {
-        Task<string> CreateUser(string firstName, string lastName, string email, string password);
+        Task<int> Register(string email, string password);
+        Task<string> Login(string email, string password);
     }
 }

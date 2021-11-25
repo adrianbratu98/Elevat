@@ -12,34 +12,32 @@ namespace Application.Employees.Commands.CreateEmployee
 {
     public class CreateEmployeeCommand : IRequest<int>
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string Email { get; set; }
-
-        public string Password { get; set; }
+        public List<int> ServiceIds { get; set; }
     }
 
     public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, int>
     {
         private readonly IElevatDbContext _context;
 
-        private IIdentityService _identityService { get; set; }
-
-        public CreateEmployeeCommandHandler(IElevatDbContext context, IIdentityService identityService)
+        public CreateEmployeeCommandHandler(IElevatDbContext context)
         {
             _context = context;
-            _identityService = identityService;
         }
 
         public async Task<int> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-
-            //...
-            return 0;
+            var employeeId = (await _context.Employees.AddAsync(new Employee())).Entity.Id;
+            var employeeServices = request.ServiceIds
+                .Select(serviceId => new EmployeeService()
+                {
+                    EmployeeId = employeeId,
+                    ServiceId = serviceId
+                })
+                .ToList();
+            await _context.EmployeesServices.AddRangeAsync(employeeServices);
+            return employeeId;
         }
     }
 }

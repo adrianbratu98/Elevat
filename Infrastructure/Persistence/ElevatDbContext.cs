@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using Infrastructure.Indentity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -9,18 +10,23 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class ElevatDbContext : IdentityDbContext<ApplicationUser>, IElevatDbContext
+    public class ElevatDbContext : IdentityDbContext<User, Role, int>, IElevatDbContext 
     {
         public DbContext Instance => this;
+
         public ElevatDbContext(DbContextOptions<ElevatDbContext> options) : base(options) { }
+
+        public DbSet<UserAccount> UserAccounts { get; set; }
+
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Client> Clients { get; set; }
+
         public DbSet<Service> Services { get; set; }
+
         public DbSet<EmployeeService> EmployeesServices { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return SaveChangesAsync(acceptAllChangesOnSuccess: true, cancellationToken);
+            return SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
