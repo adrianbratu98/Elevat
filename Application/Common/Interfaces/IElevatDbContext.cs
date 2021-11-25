@@ -14,6 +14,7 @@ namespace Application.Common.Interfaces
         DbContext Instance { get; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<EmployeeService> EmployeesServices { get; set; }
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

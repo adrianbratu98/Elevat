@@ -48,17 +48,16 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
   }
 
   addRow() {
-    if(!this.workService){
+      this.services = this.services.filter(service => service.id != 0);
       this.workService = { id: 0, name: '', minutes: 0, price: 0 };
       this.services.push({ id: 0, name: '', minutes: 0, price: 0 });
       setTimeout(()=>{ 
         document.getElementById('focusInput')?.focus();
-      }, 0);
-    }    
+      }, 0);   
   }
 
   editRow(service: ServiceDTO) {
-    if(!this.workService) {
+    this.services = this.services.filter(service => service.id != 0);
       this.workService = {
         id: service.id,
         name: service.name,
@@ -68,7 +67,6 @@ export class ManageServicesComponent implements OnInit, OnDestroy {
       setTimeout(()=>{ 
         document.getElementById('focusInput')?.focus();
       },0); 
-    }
   }
 
   cancel() {
