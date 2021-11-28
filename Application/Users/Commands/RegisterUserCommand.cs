@@ -15,7 +15,6 @@ namespace Application.Users.Commands
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
-
     }
 
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, int>
@@ -34,9 +33,9 @@ namespace Application.Users.Commands
             {
                 var identityId = await _identity.Register(request.Email, request.Password);
                 var user = new UserAccount() { IdentityId = identityId, FirstName = request.FirstName };
-                var id = (await _context.UserAccounts.AddAsync(user)).Entity.Id;
+                var entity = await _context.UserAccounts.AddAsync(user, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
-                return id;
+                return entity.Entity.Id;
             }
             catch(Exception e)
             {

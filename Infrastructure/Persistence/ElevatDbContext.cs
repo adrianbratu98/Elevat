@@ -1,7 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using Infrastructure.Indentity;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -12,8 +11,6 @@ namespace Infrastructure.Persistence
 {
     public class ElevatDbContext : IdentityDbContext<User, Role, int>, IElevatDbContext 
     {
-        public DbContext Instance => this;
-
         public ElevatDbContext(DbContextOptions<ElevatDbContext> options) : base(options) { }
 
         public DbSet<UserAccount> UserAccounts { get; set; }
@@ -24,9 +21,9 @@ namespace Infrastructure.Persistence
 
         public DbSet<EmployeeService> EmployeesServices { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,7 +40,6 @@ namespace Infrastructure.Persistence
                 .HasOne<Service>(s => s.Service)
                 .WithMany(es => es.EmployeesServices)
                 .HasForeignKey(s => s.ServiceId);
-
 
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

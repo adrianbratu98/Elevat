@@ -15,12 +15,11 @@ namespace WebUI.Controllers
     public class ServicesController : ApiControllerBase
     {
 
-
         //GET ALL
         [HttpPost("getList")]
-        public async Task<List<ServiceDTO>> GetList(GetServiceListQuery query)
+        public async Task<ActionResult<List<ServiceDTO>>> GetList(GetServiceListQuery query)
         {
-            return await Mediator.Send(query);
+            return Ok(await Mediator.Send(query));
         }
 
         //GET BY ID

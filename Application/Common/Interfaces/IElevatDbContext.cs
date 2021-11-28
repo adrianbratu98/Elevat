@@ -11,8 +11,6 @@ namespace Application.Common.Interfaces
 {
     public interface IElevatDbContext 
     {
-        DbContext Instance { get; }
-
         public DbSet<Service> Services { get; set; }
 
         public DbSet<UserAccount> UserAccounts { get; set; }

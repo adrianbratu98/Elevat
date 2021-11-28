@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,23 +18,33 @@ namespace Application.Services.Commands.CreateService
     public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand, int>
     {
         private readonly IElevatDbContext _context;
+
         public CreateServiceCommandHandler(IElevatDbContext context)
         {
             _context = context;
         }
+
         public async Task<int> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Service
+            try
             {
-                Id = request.Id,
-                Name = request.Name,
-                Minutes = request.Minutes,
-                Price = request.Price
-            };
+                var entity = new Service
+                {
+                    Id = request.Id,
+                    Name = request.Name,
+                    Minutes = request.Minutes,
+                    Price = request.Price
+                };
 
-            _context.Services.Add(entity);
-            await _context.SaveChangesAsync(cancellationToken);
-            return entity.Id;
+                var id = (await _context.Services.AddAsync(entity)).Entity.Id;
+                await _context.SaveChangesAsync(cancellationToken);
+                return id;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+       
         }
     }
 }
