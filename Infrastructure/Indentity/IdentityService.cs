@@ -17,10 +17,10 @@ namespace Elevat.Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _config;
 
-        public IdentityService(UserManager<User> userManager, IConfiguration config)
+        public IdentityService(UserManager<ApplicationUser> userManager, IConfiguration config)
         {
             _userManager = userManager;
             _config = config;
@@ -31,10 +31,10 @@ namespace Elevat.Infrastructure.Identity
         {
             try
             {
-                var user = new User()
+                var user = new ApplicationUser()
                 {
-                    UserName = email.Split("@")[0],
                     Email = email,
+                    UserName = email.Split("@")[0],
                 };
                 var ceva = await _userManager.CreateAsync(user, password);
                 var createdUser = await _userManager.FindByEmailAsync(email);

@@ -23,7 +23,7 @@ namespace Infrastructure
                 options.UseNpgsql(configuration.GetConnectionString("ElevatDB")));
 
             //Idenitity
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ElevatDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ElevatDbContext>();
 
 
             services.Configure<IdentityOptions>(options =>

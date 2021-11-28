@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Indentity
 {
-    public class User : IdentityUser<int> { }
+    public class ApplicationUser : IdentityUser<int> { }
 }

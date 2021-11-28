@@ -13,8 +13,8 @@ namespace Application.Users.Commands
     public class RegisterUserCommand : IRequest<int>
     {
         public string Email { get; set; }
-        public string Password { get; set; }
         public string FirstName { get; set; }
+        public string Password { get; set; }
 
     }
 
@@ -32,11 +32,11 @@ namespace Application.Users.Commands
         {
             try
             {
-                var identityId = await _identity.Register(request.Email, request.Password);
-                var user = new UserAccount() { IdentityId = identityId, FirstName = request.FirstName };
-                var id = (await _context.UserAccounts.AddAsync(user)).Entity.Id;
+                var applicationUserId = await _identity.Register(request.Email, request.Password);
+                var user = new UserAccount() { ApplicationUserId = applicationUserId, FirstName = request.FirstName };
+                var userId = (await _context.UserAccounts.AddAsync(user)).Entity.Id;
                 await _context.SaveChangesAsync(cancellationToken);
-                return id;
+                return userId;
             }
             catch(Exception e)
             {
