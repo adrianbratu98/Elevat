@@ -12,10 +12,9 @@ namespace Domain.Entities
 
         public string FirstName { get; set; }
 
-        public int IdentityId { get; set; }
+        public int ApplicationUserId { get; set; }
 
         public int? EmployeeId { get; set; }
-
 
         public Employee Employee { get; set; }
     }
