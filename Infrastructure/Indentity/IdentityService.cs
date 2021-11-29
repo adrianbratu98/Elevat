@@ -1,6 +1,5 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using Infrastructure.Indentity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,26 +16,25 @@ namespace Elevat.Infrastructure.Identity
 {
     public class IdentityService : IIdentityService
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<IdentityUser<int>> _userManager;
         private readonly IConfiguration _config;
 
-        public IdentityService(UserManager<User> userManager, IConfiguration config)
+        public IdentityService(UserManager<IdentityUser<int>> userManager, IConfiguration config)
         {
             _userManager = userManager;
             _config = config;
-
         }
 
         public async Task<int> Register(string email, string password)
         {
             try
             {
-                var user = new User()
+                var user = new IdentityUser<int>()
                 {
                     UserName = email.Split("@")[0],
                     Email = email,
                 };
-                var ceva = await _userManager.CreateAsync(user, password);
+                await _userManager.CreateAsync(user, password);
                 var createdUser = await _userManager.FindByEmailAsync(email);
                 return createdUser.Id;
             }
@@ -44,7 +42,6 @@ namespace Elevat.Infrastructure.Identity
             {
                 return 0;
             }
-       
         }
 
         public async Task<string> Login(string email, string password)
@@ -56,10 +53,11 @@ namespace Elevat.Infrastructure.Identity
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserID",user.Id.ToString())
+                        new Claim("UserID",user.Id.ToString()),
+                        new Claim(ClaimTypes.Email, email)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Auth:JWT_Secret"))), SecurityAlgorithms.HmacSha256Signature)
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Auth:JWT_Secret"))), SecurityAlgorithms.HmacSha256Signature),
                 };
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);

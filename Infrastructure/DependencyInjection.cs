@@ -1,6 +1,5 @@
 ﻿using Application.Common.Interfaces;
 using Elevat.Infrastructure.Identity;
-using Infrastructure.Indentity;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +22,7 @@ namespace Infrastructure
                 options.UseNpgsql(configuration.GetConnectionString("ElevatDB")));
 
             //Idenitity
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ElevatDbContext>();
+            services.AddDefaultIdentity<IdentityUser<int>>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ElevatDbContext>();
 
 
             services.Configure<IdentityOptions>(options =>

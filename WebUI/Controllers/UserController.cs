@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -28,14 +29,11 @@ namespace WebUI.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserAccountDto>> Get()
+        public async Task<ActionResult<AccountDto>> Get()
         {
             var query = new UserAccountQuery();
-            query.IdentityId = Int32.Parse(User.Claims.First(c => c.Type == "UserID").Value);
+            query.Email = User.FindFirstValue(ClaimTypes.Email);
             return Ok(await Mediator.Send(query));
         }
-
-
-
     }
 }

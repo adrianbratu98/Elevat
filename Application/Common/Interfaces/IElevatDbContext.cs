@@ -13,7 +13,7 @@ namespace Application.Common.Interfaces
     {
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<UserAccount> UserAccounts { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
 

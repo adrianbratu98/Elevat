@@ -1,6 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using Infrastructure.Indentity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
 {
-    public class ElevatDbContext : IdentityDbContext<User, Role, int>, IElevatDbContext 
+    public class ElevatDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>, IElevatDbContext 
     {
         public ElevatDbContext(DbContextOptions<ElevatDbContext> options) : base(options) { }
 
-        public DbSet<UserAccount> UserAccounts { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
 
@@ -27,14 +27,13 @@ namespace Infrastructure.Persistence
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+        {
             modelBuilder.Entity<EmployeeService>().HasKey(sc => new { sc.EmployeeId, sc.ServiceId });
 
             modelBuilder.Entity<EmployeeService>()
                 .HasOne<Employee>(e => e.Employee)
                 .WithMany(es => es.EmployeesServices)
                 .HasForeignKey(e => e.EmployeeId);
-
 
             modelBuilder.Entity<EmployeeService>()
                 .HasOne<Service>(s => s.Service)
