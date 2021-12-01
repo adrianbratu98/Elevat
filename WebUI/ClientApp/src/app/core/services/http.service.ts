@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpEndpoints } from '../models/App/http-endpoints';
 import { HttpMethod } from '../models/App/http-methods';
 
@@ -9,20 +10,38 @@ import { HttpMethod } from '../models/App/http-methods';
 })
 export class HttpService {
 
-  private baseUri ="https://localhost:44372/api";
+  private baseUri ="https://localhost:5001/api";
 
   private token: string | undefined;
 
   constructor(private httpClient: HttpClient) { }
 
   public makeHttpCall(endPoint: HttpEndpoints, method: HttpMethod, param?:any) : Observable<any> {
+    let obs: Observable<any>;
     switch(method) {
-      case HttpMethod.GET: return this.httpClient.get(`${this.baseUri}/${endPoint.toString()}`, { headers: this.getHeaders(), responseType: 'text' });
-      case HttpMethod.POST: return this.httpClient.post(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
-      case HttpMethod.PUT: return this.httpClient.put(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
-      case HttpMethod.DELETE: return this.httpClient.delete(`${this.baseUri}/${endPoint.toString()}/${param}`, { headers: this.getHeaders(), responseType: 'text' });
-      default: throw new Error("Method type is no valid");
+      case HttpMethod.GET: {
+        obs = this.httpClient.get(`${this.baseUri}/${endPoint.toString()}`, { headers: this.getHeaders(), responseType: 'text' });
+        break;
+      }
+      case HttpMethod.POST: {
+        obs = this.httpClient.post(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
+        break;
+      } 
+      case HttpMethod.PUT: {
+        obs = this.httpClient.put(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
+        break;
+      } 
+      case HttpMethod.DELETE: {
+        obs = this.httpClient.delete(`${this.baseUri}/${endPoint.toString()}/${param}`, { headers: this.getHeaders(), responseType: 'text' });
+        break;
+      }
+      default: throw new Error("Invalid http method");
     }
+    return obs.pipe(map(
+      (response) => {
+        return JSON.parse(response);
+      }
+    ))
   }
 
   setToken(token: string) {
