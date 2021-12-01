@@ -32,7 +32,7 @@ namespace WebUI.Controllers
         public async Task<ActionResult<AccountDto>> Get()
         {
             var query = new UserAccountQuery();
-            query.Email = User.FindFirstValue(ClaimTypes.Email);
+            query.Id = Int32.Parse(User.Claims.First(c => c.Type == "UserID").Value);
             return Ok(await Mediator.Send(query));
         }
     }

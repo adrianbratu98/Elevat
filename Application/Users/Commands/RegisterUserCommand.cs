@@ -8,9 +8,17 @@ namespace Application.Users.Commands
 {
     public class RegisterUserCommand : IRequest<int>
     {
+        public string Username { get; set; }
+
         public string Email { get; set; }
-        public string Password { get; set; }
+
         public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Age { get; set; }
+
+        public string Password { get; set; }
     }
 
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, int>
@@ -25,11 +33,19 @@ namespace Application.Users.Commands
 
         public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            await _identity.Register(request.Email, request.Password);
-            var account = new Account() { Email = request.Email, FirstName = request.FirstName };
-            var saved = await _context.Accounts.AddAsync(account, cancellationToken);
+            var identityId = await _identity.Register(request.Email, request.Password, request.Username);
+            var account = new Account() 
+            { 
+                Id = identityId,
+                Username = request.Username,
+                Email = request.Email, 
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Age = request.Age
+            };
+            await _context.Accounts.AddAsync(account, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
-            return saved.Entity.Id;
+            return account.Id;
         }
     }
 

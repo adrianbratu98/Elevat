@@ -25,14 +25,14 @@ namespace Elevat.Infrastructure.Identity
             _config = config;
         }
 
-        public async Task<int> Register(string email, string password)
+        public async Task<int> Register(string email, string password, string username)
         {
             try
             {
                 var user = new IdentityUser<int>()
                 {
-                    UserName = email.Split("@")[0],
-                    Email = email,
+                    UserName = username,
+                    Email = email
                 };
                 await _userManager.CreateAsync(user, password);
                 var createdUser = await _userManager.FindByEmailAsync(email);
@@ -40,7 +40,7 @@ namespace Elevat.Infrastructure.Identity
             }
             catch(Exception e)
             {
-                return 0;
+                throw new Exception("Identity user couldn't be created");
             }
         }
 
@@ -53,8 +53,7 @@ namespace Elevat.Infrastructure.Identity
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserID",user.Id.ToString()),
-                        new Claim(ClaimTypes.Email, email)
+                        new Claim("UserID",user.Id.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Auth:JWT_Secret"))), SecurityAlgorithms.HmacSha256Signature),

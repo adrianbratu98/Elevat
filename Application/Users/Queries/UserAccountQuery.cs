@@ -13,7 +13,7 @@ namespace Application.Users.Queries
 {
     public class UserAccountQuery : IRequest<AccountDto>
     {
-        public string Email { get; set; }
+        public int Id { get; set; }
     }
 
     public class UserAccountQueryHandler : IRequestHandler<UserAccountQuery, AccountDto>
@@ -28,11 +28,14 @@ namespace Application.Users.Queries
 
         public async Task<AccountDto> Handle(UserAccountQuery request, CancellationToken cancellationToken)
         {
-            var userAccount = await _context.Accounts.FirstAsync(user => user.Email == request.Email);
+            var userAccount = await _context.Accounts.FirstAsync(user => user.Id == request.Id);
             return new AccountDto()
             {
                 Id = userAccount.Id,
-                FirstName = userAccount.FirstName
+                Email = userAccount.Email,
+                FirstName = userAccount.FirstName,
+                LastName = userAccount.LastName,
+                Age = userAccount.Age
             };
         }
     }

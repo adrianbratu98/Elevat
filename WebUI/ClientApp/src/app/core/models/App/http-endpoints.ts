@@ -4,4 +4,7 @@ export enum HttpEndpoints {
     UpdateService = "service/update",
     DeleteService = "service/delete",
     GetAllEmployees = "employee/getList",
+    Register = "user/register",
+    Login = "user/login",
+    GetUser = "user"
 }

@@ -28,7 +28,8 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EmployeeService>().HasKey(sc => new { sc.EmployeeId, sc.ServiceId });
+            modelBuilder.Entity<EmployeeService>()
+                .HasKey(sc => new { sc.EmployeeId, sc.ServiceId });
 
             modelBuilder.Entity<EmployeeService>()
                 .HasOne<Employee>(e => e.Employee)
