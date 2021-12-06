@@ -1,7 +1,7 @@
 <nav [class.bg-nav-mobile]="check" class="navbar navbar-expand-lg">
     <div class="container">
       <a class="navbar-brand" style="font-size: 30px;color: white;" href="#">LOGO</a>
-      <button id="nav-icon1" [class.open]="check" (click)="toggle()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button id="nav-icon1" [class.open]="check" (click)="check = !check" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
@@ -35,7 +35,14 @@
         </ul>
       </div>
     </div>
-    <div class="sign-in-buttons">
-      <a class="login-btn" (click)="goToAuth()">Authentication</a>
+    <div *ngIf="!user" class="sign-in-buttons">
+      <a class="login-btn" style="cursor: pointer;" (click)="goToAuth()">Authentication</a>
+    </div>
+    <div *ngIf="user" class="sign-in-buttons">
+      <a>{{user.firstName + " "}}</a>
+      <a>{{user.lastName + " -"}}</a>
+    </div>
+    <div *ngIf="user" style="cursor: pointer;" class="sign-in-buttons">
+      <a class="login-btn" (click)="logout()">Logout</a>
     </div>
   </nav>

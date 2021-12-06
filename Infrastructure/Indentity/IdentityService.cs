@@ -25,16 +25,17 @@ namespace Elevat.Infrastructure.Identity
             _config = config;
         }
 
-        public async Task<int> Register(string email, string password, string username)
+        public async Task<int> Register(string email, string password)
         {
             try
             {
                 var user = new IdentityUser<int>()
                 {
-                    UserName = username,
+                    UserName = email.Split('@')[0] + email.Split('@')[1],
                     Email = email
                 };
-                await _userManager.CreateAsync(user, password);
+                var identityUser = await _userManager.CreateAsync(user, password);  
+                var test = user.Id;
                 var createdUser = await _userManager.FindByEmailAsync(email);
                 return createdUser.Id;
             }

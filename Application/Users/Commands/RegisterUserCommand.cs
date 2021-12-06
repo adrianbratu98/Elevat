@@ -33,7 +33,7 @@ namespace Application.Users.Commands
 
         public async Task<int> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var identityId = await _identity.Register(request.Email, request.Password, request.Username);
+            var identityId = await _identity.Register(request.Email, request.Password);
             var account = new Account() 
             { 
                 Id = identityId,

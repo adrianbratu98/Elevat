@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using FluentValidation;
+using Application.Users.Commands;
 
 namespace Application
 {
@@ -11,6 +13,8 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddTransient<IValidator<RegisterUserCommand>, RegisterUserCommandValidation>();
             return services;
         }
 
