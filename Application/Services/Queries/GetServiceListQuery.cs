@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-using Domain.DTOs;
+using Domain.Dtos;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Queries
 {
-    public class GetServiceListQuery : IRequest<List<ServiceDTO>>
+    public class GetServiceListQuery : IRequest<List<ServiceDto>>
     {
         public string SortColumn { get; set; }
         
@@ -19,7 +19,7 @@ namespace Application.Services.Queries
         public string NameFilter { get; set; }
     }
 
-    public class GetServiceListQueryHandler : IRequestHandler<GetServiceListQuery, List<ServiceDTO>>
+    public class GetServiceListQueryHandler : IRequestHandler<GetServiceListQuery, List<ServiceDto>>
     {
 
         private readonly IElevatDbContext _context;
@@ -29,11 +29,11 @@ namespace Application.Services.Queries
             _context = context;
         }
 
-        public async Task<List<ServiceDTO>> Handle(GetServiceListQuery request, CancellationToken cancellationToken)
+        public async Task<List<ServiceDto>> Handle(GetServiceListQuery request, CancellationToken cancellationToken)
         {
 
             var query = _context.Services
-                .Select(service => new ServiceDTO 
+                .Select(service => new ServiceDto 
                 { 
                     Id = service.Id, 
                     Name = service.Name, 

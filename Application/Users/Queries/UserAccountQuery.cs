@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-using Domain.DTOs;
+using Domain.Dtos;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

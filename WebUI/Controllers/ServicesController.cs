@@ -1,10 +1,9 @@
 ﻿using Application.Services.Commands.CreateService;
 using Application.Services.Commands.DeleteService;
 using Application.Services.Queries;
-using Domain.DTOs;
+using Domain.Dtos;
 using Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,7 +16,7 @@ namespace WebUI.Controllers
 
         //GET ALL
         [HttpPost("getList")]
-        public async Task<ActionResult<List<ServiceDTO>>> GetList(GetServiceListQuery query)
+        public async Task<ActionResult<List<ServiceDto>>> GetList(GetServiceListQuery query)
         {
             return Ok(await Mediator.Send(query));
         }

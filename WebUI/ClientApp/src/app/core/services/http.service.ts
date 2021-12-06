@@ -10,7 +10,7 @@ import { HttpMethod } from '../models/App/http-methods';
 })
 export class HttpService {
 
-  private baseUri ="https://localhost:44372/api";
+  private baseUri ="https://localhost:5001/api";
 
   private token: string | undefined;
 

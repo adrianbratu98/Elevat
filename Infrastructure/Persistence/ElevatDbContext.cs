@@ -21,6 +21,10 @@ namespace Infrastructure.Persistence
 
         public DbSet<EmployeeService> EmployeesServices { get; set; }
 
+        public DbSet<Appointment> Appointments { get; set; }
+        
+        public DbSet<AppointmentService> AppointmentService { get; set; }
+
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             return await base.SaveChangesAsync(cancellationToken);
@@ -33,7 +37,7 @@ namespace Infrastructure.Persistence
 
             modelBuilder.Entity<EmployeeService>()
                 .HasOne<Employee>(e => e.Employee)
-                .WithMany(es => es.EmployeesServices)
+                .WithMany(es => es.EmployeeServices)
                 .HasForeignKey(e => e.EmployeeId);
 
             modelBuilder.Entity<EmployeeService>()

@@ -1,15 +1,10 @@
-﻿using Application.Employees.Commands.CreateEmployee;
-using Application.Employees.Queries;
-using Application.Users.Commands;
+﻿using Application.Users.Commands;
 using Application.Users.Queries;
-using Domain.DTOs;
-using Domain.Entities;
+using Domain.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 
