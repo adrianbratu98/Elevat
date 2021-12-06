@@ -8,6 +8,8 @@ namespace Domain.Entities
 {
     public class EmployeeService
     {
+        public int Id { get; set; }
+
         public int EmployeeId { get; set; }
 
         public Employee Employee { get; set; }
