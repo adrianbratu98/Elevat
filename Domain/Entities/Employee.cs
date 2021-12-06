@@ -8,6 +8,6 @@ namespace Domain.Entities
 
         public string Name { get; set; }
 
-        public ICollection<EmployeeService> EmployeesServices { get; set; }
+        public ICollection<EmployeeService> EmployeeServices { get; set; }
     }
 }

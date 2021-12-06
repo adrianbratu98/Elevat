@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTOs
+namespace Domain.Dtos
 {
-    public class ServiceDTO
+    public class ServiceDto
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public int Minutes { get; set; }
+        
         public double Price { get; set; }
     }
 }

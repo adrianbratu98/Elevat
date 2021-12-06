@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTOs
+namespace Domain.Dtos
 {
-    public class EmployeeDTO
+    public class EmployeeDto
     {
         public int Id { get; set; }
+
         public string FirstName { get; set; }
+        
         public string LastName { get; set; }
     }
 }
