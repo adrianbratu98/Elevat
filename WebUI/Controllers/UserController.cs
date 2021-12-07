@@ -20,7 +20,10 @@ namespace WebUI.Controllers
 
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(LoginUserCommand command)
-            => Ok(await Mediator.Send(command));
+        {
+            var token = await Mediator.Send(command);
+            return Ok(new { token });
+        }
 
         [Authorize]
         [HttpGet]

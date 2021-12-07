@@ -19,31 +19,12 @@ export class HttpService {
   public makeHttpCall(endPoint: HttpEndpoints, method: HttpMethod, param?:any) : Observable<any> {
     let obs: Observable<any>;
     switch(method) {
-      case HttpMethod.GET: {
-        obs = this.httpClient.get(`${this.baseUri}/${endPoint.toString()}`, { headers: this.getHeaders(), responseType: 'text' });
-        break;
-      }
-      case HttpMethod.POST: {
-        obs = this.httpClient.post(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
-        break;
-      } 
-      case HttpMethod.PUT: {
-        obs = this.httpClient.put(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders(), responseType: 'text' });
-        break;
-      } 
-      case HttpMethod.DELETE: {
-        obs = this.httpClient.delete(`${this.baseUri}/${endPoint.toString()}/${param}`, { headers: this.getHeaders(), responseType: 'text' });
-        break;
-      }
+      case HttpMethod.GET: return this.httpClient.get(`${this.baseUri}/${endPoint.toString()}`, { headers: this.getHeaders()});
+      case HttpMethod.POST: return this.httpClient.post(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders()});
+      case HttpMethod.PUT: return this.httpClient.put(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders()});
+      case HttpMethod.DELETE: return this.httpClient.delete(`${this.baseUri}/${endPoint.toString()}/${param}`, { headers: this.getHeaders()});
       default: throw new Error("Invalid http method");
     }
-    return obs.pipe(map(
-      (response) => {
-        if(response[0] == "{" && response[response.length - 1] == "}")
-          return JSON.parse(response);
-        return response;
-      }
-    ))
   }
 
   setToken(token: string) {

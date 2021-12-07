@@ -36,8 +36,8 @@ export class AuthService {
     return this.httpService.makeHttpCall(HttpEndpoints.Login, HttpMethod.POST, { email, password }).pipe(
       mergeMap(
         (token) => {
-            this.httpService.setToken(token);
-            localStorage.setItem('token', token);
+            this.httpService.setToken(token.token);
+            localStorage.setItem('token', token.token);
             return this.getUser();
         },
     ))
