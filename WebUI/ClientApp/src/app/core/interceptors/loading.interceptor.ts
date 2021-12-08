@@ -7,24 +7,22 @@ import { finalize } from 'rxjs/operators';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-  totalRequests: number = 0;
-  completedRequests: number = 0;
+  loadingCount: number = 0;
+
 
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>> {
+
     this.loadingService.startLoading();
-    this.totalRequests ++;
+
+    this.loadingCount++;
+
     return next.handle(request).pipe(
       finalize(() => {
-          this.completedRequests ++;
-
-          if (this.completedRequests === this.totalRequests) {
-            this.loadingService.stopLoading()
-            this.completedRequests = 0;
-            this.totalRequests = 0;
-          }
-
+          this.loadingCount--;
+          if(this.loadingCount == 0)
+            this.loadingService.stopLoading(); 
         }
       )
     )

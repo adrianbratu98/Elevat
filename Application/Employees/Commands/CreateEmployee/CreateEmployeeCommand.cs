@@ -13,9 +13,8 @@ namespace Application.Employees.Commands.CreateEmployee
 {
     public class CreateEmployeeCommand : IRequest<int>
     {
-        public int UserId { get; set; }
-
-        public List<int> ServiceIds { get; set; }
+        public int AccountId { get; set; }
+            
     }
 
     public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, int>
@@ -29,13 +28,20 @@ namespace Application.Employees.Commands.CreateEmployee
 
         public async Task<int> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var userAccount = await _context.Accounts.FirstAsync(user => user.Id == request.UserId);
-            var employee = new Employee()
-            {
+            var account = await _context.Accounts.FirstAsync(account => account.Id == request.AccountId);
 
-            }
-            var account = await _context.Employees.Add(employee)
-            return 0;
+            var newEmployee = new Employee()
+            {
+                Id = request.AccountId,
+                Name = account.FirstName + " " + account.LastName
+            };                      
+
+            await _context.Employees.AddAsync(newEmployee);
+            account.EmployeeId = newEmployee.Id;
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return newEmployee.Id;
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Elevat.Infrastructure.Identity
                     Email = email
                 };
                 var identityUser = await _userManager.CreateAsync(user, password);  
-                var test = user.Id;
                 var createdUser = await _userManager.FindByEmailAsync(email);
                 return createdUser.Id;
             }
