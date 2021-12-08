@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './features/admin/admin.module';
 import { AuthModule } from './features/auth/auth.module';
 import { HomeModule } from './features/home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { LoadingComponent } from './core/components/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -21,9 +24,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

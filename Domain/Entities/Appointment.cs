@@ -11,8 +11,7 @@ namespace Domain.Entities
 
         public int EmployeeId { get; set; }
 
-        public DateTime Date { get; set; }
-        
+        public DateTime Date { get; set; }        
 
         public ICollection<AppointmentService> AppointmentServices { get; set; } 
 

@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,13 @@ namespace Application.Employees.Commands.CreateEmployee
 
         public async Task<int> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var employeeId = (await _context.Employees.AddAsync(new Employee())).Entity.Id;
-            var employeeServices = request.ServiceIds
-                .Select(serviceId => new EmployeeService()
-                {
-                    EmployeeId = employeeId,
-                    ServiceId = serviceId
-                })
-                .ToList();
-            await _context.EmployeesServices.AddRangeAsync(employeeServices);
-            return employeeId;
+            var userAccount = await _context.Accounts.FirstAsync(user => user.Id == request.UserId);
+            var employee = new Employee()
+            {
+
+            }
+            var account = await _context.Employees.Add(employee)
+            return 0;
         }
     }
 }
