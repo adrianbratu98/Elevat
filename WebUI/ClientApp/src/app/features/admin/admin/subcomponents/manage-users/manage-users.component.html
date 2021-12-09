@@ -1,0 +1,30 @@
+<div class="wrapper-dash">
+    <div class="container d-flex justify-content-center">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Program</th>
+                <th scope="col">Sallary</th>
+                <th scope="col">Services</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="users">
+              <tr *ngFor="let user of users; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{user.email}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.employee?.program}}</td>
+                <td>{{user.employee?.sallary}}</td>
+                <td>{{user.employee?.services}}</td>
+              </tr>              
+            </tbody>
+          </table>
+    </div>
+</div>

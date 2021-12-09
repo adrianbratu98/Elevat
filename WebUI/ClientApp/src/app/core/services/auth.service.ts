@@ -7,6 +7,7 @@ import { Register } from '../models/App/Register';
 import { User } from '../models/App/User';
 import { HttpService } from './http.service';
 import { delay, map, mergeMap } from 'rxjs/operators';
+import { AccountListDto } from '../models/Dto/account-list-dto';
 
 @Injectable({
   providedIn: 'root'

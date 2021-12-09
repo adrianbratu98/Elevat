@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ElevatDbContext))]
-    [Migration("20211208201357_001")]
+    [Migration("20211209213318_001")]
     partial class _001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,10 +110,18 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("ProgramCode")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("Sallary")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("Employees");
                 });
@@ -138,6 +146,21 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("EmployeesServices");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Program", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Programs");
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>
@@ -403,6 +426,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Appointment");
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Employee", b =>
+                {
+                    b.HasOne("Domain.Entities.Program", "Program")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
                 });
 
             modelBuilder.Entity("Domain.Entities.EmployeeService", b =>

@@ -3,6 +3,7 @@ using Application.Employees.Queries;
 using Application.Users.Commands;
 using Application.Users.Queries;
 using Domain.Dtos;
+using Domain.DTOs;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,9 +51,9 @@ namespace WebUI.Controllers
 
 
         [HttpGet("getList")]
-        public async Task<ActionResult<List<Account>>> GetEmployees()
+        public async Task<ActionResult<List<AccountListDto>>> GetList()
         {
-            return Ok(await Mediator.Send(new GetEmployeeListQuery()));
+            return Ok(await Mediator.Send(new GetUserListQuery()));
 
         }
     }

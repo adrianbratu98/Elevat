@@ -19,6 +19,8 @@ namespace Infrastructure.Persistence
 
         public DbSet<Service> Services { get; set; }
 
+        public DbSet<Program> Programs { get; set; }
+
         public DbSet<EmployeeService> EmployeesServices { get; set; }
 
         public DbSet<Appointment> Appointments { get; set; }

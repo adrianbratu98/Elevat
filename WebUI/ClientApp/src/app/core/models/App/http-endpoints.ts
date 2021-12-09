@@ -6,5 +6,6 @@ export enum HttpEndpoints {
     GetAllEmployees = "employee/getList",
     Register = "user/register",
     Login = "user/login",
-    GetUser = "user"
+    GetUser = "user",
+    GetUserList = "user/getList"
 }

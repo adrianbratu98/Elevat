@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTOs
+namespace Domain.Dtos
 {
-    public class AccountDto
+    public class AccountListDto
     {
-        public int Id { get; set; }
-
-        public string Username { get; set; }
+        public int Id {  get; set; }
 
         public string Email { get; set; }
 
@@ -18,6 +16,8 @@ namespace Domain.DTOs
 
         public string LastName { get; set; }
 
-        public int Age { get; set; }
-    }
+        public string Age { get; set; }
+
+        public EmployeeListDto Employee { get; set; }
+    }   
 }

@@ -14,7 +14,12 @@ namespace Application.Employees.Commands.CreateEmployee
     public class CreateEmployeeCommand : IRequest<int>
     {
         public int AccountId { get; set; }
-            
+
+        public int ProgramCode { get; set; }
+
+        public long Sallary { get; set; }
+
+        public List<int> ServiceIds { get; set; }
     }
 
     public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, int>
@@ -32,12 +37,23 @@ namespace Application.Employees.Commands.CreateEmployee
 
             var newEmployee = new Employee()
             {
-                Id = request.AccountId,
-                Name = account.FirstName + " " + account.LastName
+                ProgramCode = request.ProgramCode,
+                Sallary = request.Sallary,
             };                      
 
             await _context.Employees.AddAsync(newEmployee);
+            await _context.SaveChangesAsync(cancellationToken);
             account.EmployeeId = newEmployee.Id;
+
+            _context.Accounts.Update(account);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            await _context.EmployeesServices.AddRangeAsync(request.ServiceIds
+                .Select(serviceId => new EmployeeService()
+                {
+                    EmployeeId = newEmployee.Id,
+                    ServiceId = serviceId
+                }));
 
             await _context.SaveChangesAsync(cancellationToken);
 

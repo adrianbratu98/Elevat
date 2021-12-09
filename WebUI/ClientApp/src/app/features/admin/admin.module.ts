@@ -4,7 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ManageServicesComponent } from './admin/subcomponents/manage-services/manage-services.component';
 import { DashboardComponent } from './admin/subcomponents/dashboard/dashboard.component';
 import { SidebarComponent } from './admin/subcomponents/sidebar/sidebar.component';
-import { ManageEmployeesComponent } from './admin/subcomponents/manage-employees/manage-employees.component';
+import { ManageUsersComponent } from './admin/subcomponents/manage-users/manage-users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -16,7 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ManageServicesComponent,
     DashboardComponent,
     SidebarComponent,
-    ManageEmployeesComponent,
+    ManageUsersComponent,
   ],
   imports: [
     CommonModule,

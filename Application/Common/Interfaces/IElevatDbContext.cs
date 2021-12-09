@@ -7,6 +7,8 @@ namespace Application.Common.Interfaces
 {
     public interface IElevatDbContext 
     {
+        DbSet<Program> Programs { get; set; }
+
         DbSet<Service> Services { get; set; }
 
         DbSet<Account> Accounts { get; set; }
