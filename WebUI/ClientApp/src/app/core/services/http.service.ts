@@ -17,7 +17,6 @@ export class HttpService {
   constructor(private httpClient: HttpClient) { }
 
   public makeHttpCall(endPoint: HttpEndpoints, method: HttpMethod, param?:any) : Observable<any> {
-    let obs: Observable<any>;
     switch(method) {
       case HttpMethod.GET: return this.httpClient.get(`${this.baseUri}/${endPoint.toString()}`, { headers: this.getHeaders()});
       case HttpMethod.POST: return this.httpClient.post(`${this.baseUri}/${endPoint.toString()}`, param, { headers: this.getHeaders()});

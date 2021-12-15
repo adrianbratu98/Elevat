@@ -14,6 +14,7 @@ namespace Application.Users.Queries
 {
     public class GetUserListQuery : IRequest<List<AccountListDto>>
     {
+
     }
 
     public class GetUserListQueryHandler : IRequestHandler<GetUserListQuery, List<AccountListDto>>
@@ -49,17 +50,18 @@ namespace Application.Users.Queries
                 {
                     FirstName = item.FirstName,
                     LastName = item.LastName,
-                    Age = item.Age.ToString(),
+                    Age = item.Age?.ToString(),
                     Email = item.Email,
-                    Employee = new EmployeeListDto()
-                    {
-                        Program = item.Employee.Program,
-                        Sallary = item.Employee.Sallary.ToString(),
-                        Services = String.Join(", ", item.Employee.ServiceNames)
-                    }
+                    Employee = item.Employee == null ? 
+                        null :
+                        new EmployeeListDto()
+                        {
+                            Program = item.Employee.Program,
+                            Sallary = item.Employee.Sallary?.ToString(),
+                            Services = String.Join(", ", item.Employee.ServiceNames)
+                        }
                 })
                 .ToList();
-          
         }
     }
 }
