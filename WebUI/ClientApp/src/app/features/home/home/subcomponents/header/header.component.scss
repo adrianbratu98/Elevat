@@ -1,0 +1,22 @@
+.nav {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.644);
+  
+  .container {
+    max-width: 1500px;
+
+    .section {
+      margin-right: 50px;
+      color: white;
+    }
+    .logo {
+      color: white;
+    }
+    .account {
+      color: white;
+    }
+  }
+ 
+}

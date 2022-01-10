@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/core/models/App/User';
@@ -7,13 +7,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
   user: User | undefined;
-
-  check:boolean = false;
 
   userLoggedInSubs: Subscription | undefined;
 
@@ -36,16 +34,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userLoggedInSubs?.unsubscribe();
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll() {
-    let element = document.querySelector('.navbar') as HTMLElement;
-    if (window.pageYOffset > element.clientHeight) {
-      element.classList.add('navbar-custom');
-    } else {
-      element.classList.remove('navbar-custom');
-    }
   }
 
   goToAdmin() {

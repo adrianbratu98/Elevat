@@ -1,48 +1,18 @@
-<nav [class.bg-nav-mobile]="check" class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" style="font-size: 30px;color: white;" href="#">LOGO</a>
-      <button id="nav-icon1" [class.open]="check" (click)="check = !check" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div  class="collapse navbar-collapse" id="navbarNav">
-        <ul style="transition: .5s all;" [class.margin-ul]="check" class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Works</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Price</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Book</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="cursor: pointer;" (click)="goToAdmin()">Admin</a>
-          </li>
-        </ul>
-      </div>
+<nav class="nav">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="logo">
+            ELEVAT
+        </div>
+        <div class="sections d-flex">
+            <div class="section">Experience</div>
+            <div class="section">Price</div>
+            <div class="section">Book</div>
+            <div class="section">Shop</div>
+            <div class="section">Contact</div>
+        </div>
+        <div class="account">
+            <div>Alex Drapac</div> 
+            <div>Go to profile</div> 
+        </div>
     </div>
-    <div *ngIf="!user" class="sign-in-buttons">
-      <a class="login-btn" style="cursor: pointer;" (click)="goToAuth()">Authentication</a>
-    </div>
-    <div *ngIf="user" class="sign-in-buttons">
-      <a>{{user.firstName + " "}}</a>
-      <a>{{user.lastName + " -"}}</a>
-    </div>
-    <div *ngIf="user" style="cursor: pointer;" class="sign-in-buttons">
-      <a class="login-btn" (click)="logout()">Logout</a>
-    </div>
-  </nav>
+</nav>

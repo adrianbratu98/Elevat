@@ -1,0 +1,43 @@
+h3, h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+
+h3 {
+    color: #d19f68;
+}
+
+p {
+    font-style: italic;
+}
+
+h3, h1, p {
+    text-shadow: 2px 1px 3px black;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: left;
+}
+
+.description {
+    width: 600px;
+    color: white;
+    text-align: left;
+}
+
+img {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.slider {
+    width: 100%;
+    height: 100vh;
+}
